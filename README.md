@@ -2,6 +2,16 @@
 
 This project is a movie recommendation system that uses a combination of Groq for natural language processing and Pinecone for vector similarity search to provide personalized movie recommendations. Users can describe the type of movie they're looking for, and the system will suggest relevant titles based on their input.
 
+<div align="center">
+
+  <img src="https://github.com/developer-kulbhushan/Movie-Recommendation/blob/master/data/ui_screenshots/homepage.png" alt="Homepage" />
+
+  <br/>
+
+  <img src="https://github.com/developer-kulbhushan/Movie-Recommendation/blob/master/data/ui_screenshots/example_output.png" alt="Example_Output" />
+
+</div>
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
