@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Share2, Save, Copy, Check, Trash2 } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 import { RecommendationQuery } from '../types';
 
 interface RecommendationCardProps {
@@ -76,12 +77,24 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
 
       <div className="mb-4">
         <h4 className="font-semibold text-gray-900 mb-2">Recommendations</h4>
-        <div className="text-gray-700 leading-relaxed bg-blue-50 rounded-lg p-4 border-l-4 border-blue-400">
-          {query.response.split('\n').map((line, index) => (
-            <p key={index} className="mb-2 last:mb-0">
-              {line}
-            </p>
-          ))}
+        <div className="text-gray-700 leading-relaxed bg-blue-50 rounded-lg p-4 border-l-4 border-blue-400 prose prose-sm max-w-none">
+          <ReactMarkdown
+            components={{
+              h1: ({ children }) => <h1 className="text-xl font-bold text-gray-900 mb-3">{children}</h1>,
+              h2: ({ children }) => <h2 className="text-lg font-semibold text-gray-900 mb-2">{children}</h2>,
+              h3: ({ children }) => <h3 className="text-base font-semibold text-gray-900 mb-2">{children}</h3>,
+              p: ({ children }) => <p className="mb-3 last:mb-0 text-gray-700">{children}</p>,
+              strong: ({ children }) => <strong className="font-semibold text-gray-900">{children}</strong>,
+              em: ({ children }) => <em className="italic text-gray-700">{children}</em>,
+              ul: ({ children }) => <ul className="list-disc list-inside mb-3 space-y-1">{children}</ul>,
+              ol: ({ children }) => <ol className="list-decimal list-inside mb-3 space-y-1">{children}</ol>,
+              li: ({ children }) => <li className="text-gray-700">{children}</li>,
+              code: ({ children }) => <code className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono text-gray-800">{children}</code>,
+              blockquote: ({ children }) => <blockquote className="border-l-4 border-blue-300 pl-4 italic text-gray-600 mb-3">{children}</blockquote>,
+            }}
+          >
+            {query.response}
+          </ReactMarkdown>
         </div>
       </div>
 
