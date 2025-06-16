@@ -14,7 +14,7 @@ export const useRecommendations = () => {
     const timeoutId = setTimeout(() => controller.abort(), 30000);
 
     try {
-      const response = await fetch('http://127.0.0.1:8080/recommend', {
+      const response = await fetch('https://movie-recommendation-1ibt.onrender.com/recommend', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
