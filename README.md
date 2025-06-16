@@ -2,6 +2,8 @@
 
 This project is a movie recommendation system that uses a combination of Groq for natural language processing and Pinecone for vector similarity search to provide personalized movie recommendations. Users can describe the type of movie they're looking for, and the system will suggest relevant titles based on their input.
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Netlify-blue?style=for-the-badge&logo=netlify)](https://movie-recommendation-ai-chatbot.netlify.app/)
+
 <div align="center">
 
   <img src="https://github.com/developer-kulbhushan/Movie-Recommendation/blob/master/data/ui_screenshots/homepage.png" alt="Homepage" />
