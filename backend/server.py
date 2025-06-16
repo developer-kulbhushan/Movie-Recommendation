@@ -38,5 +38,6 @@ def recommend_movies(request: QueryRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 # --- Run the app programmatically ---
-if __name__ == "__main__":
-    uvicorn.run("server:app", host="127.0.0.1", port=8080, reload=False)
+# if __name__ == "__main__":
+#     uvicorn.run("server:app", host="127.0.0.1", port=8080, reload=False)
+ 
