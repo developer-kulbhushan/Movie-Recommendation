@@ -3,7 +3,7 @@ import os
 
 def start_backend():
     subprocess.Popen(
-        r'start cmd /k "cd backend && venv\Scripts\activate && python server.py"',
+        r'start cmd /k "cd backend && venv\Scripts\activate && uvicorn server:app --host 0.0.0.0 --port 8080"',
         shell=True
     )
 

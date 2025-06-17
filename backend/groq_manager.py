@@ -6,7 +6,7 @@ class GroqManager:
     def __init__(self):
         load_dotenv(override=True)
         self.client = Groq(
-            api_key=os.environ.get("GROQ_API_KEY"),
+            api_key=os.getenv("GROQ_API_KEY"),
         )
     
     def get_answer(self, system_prompt:str, input_text: str) -> str:
@@ -24,7 +24,7 @@ class GroqManager:
                 "content": input_text,
             }
         ],
-        model="llama-3.3-70b-versatile",    
+        model=os.getenv("GROQ_MODEL_NAME"),    
         )
 
         return chat_completion.choices[0].message.content

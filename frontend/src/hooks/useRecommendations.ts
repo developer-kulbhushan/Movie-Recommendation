@@ -6,6 +6,9 @@ export const useRecommendations = () => {
   const [error, setError] = useState<string | null>(null);
   const [queryHistory, setQueryHistory] = useState<RecommendationQuery[]>([]);
 
+  // Read API URL from environment variable
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const fetchRecommendations = useCallback(async (userQuery: string): Promise<string> => {
     setIsLoading(true);
     setError(null);
@@ -14,7 +17,7 @@ export const useRecommendations = () => {
     const timeoutId = setTimeout(() => controller.abort(), 30000);
 
     try {
-      const response = await fetch('http://127.0.0.1:8080/recommend', {
+      const response = await fetch(`${API_URL}/recommend`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,7 +35,6 @@ export const useRecommendations = () => {
       const data: ApiResponse = await response.json();
       const recommendations = data.response || data.message || 'No recommendations available';
 
-      // Add to history
       const newQuery: RecommendationQuery = {
         id: Date.now().toString(),
         query: userQuery,
@@ -41,23 +43,23 @@ export const useRecommendations = () => {
       };
 
       setQueryHistory(prev => [newQuery, ...prev.slice(0, 9)]); // Keep last 10 queries
-      
+
       return recommendations;
     } catch (err) {
       clearTimeout(timeoutId);
-      
+
       if (err instanceof Error) {
         if (err.name === 'AbortError') {
           throw new Error('Request timed out after 30 seconds. Please try again.');
         }
         throw new Error(err.message || 'Failed to fetch recommendations');
       }
-      
+
       throw new Error('An unexpected error occurred');
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [API_URL]);
 
   const clearHistory = useCallback(() => {
     setQueryHistory([]);
