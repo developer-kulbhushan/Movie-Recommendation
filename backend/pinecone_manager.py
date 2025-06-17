@@ -6,15 +6,15 @@ class PineconeManager:
     def __init__(self):
         load_dotenv(override=True)
         self.pinecone_client = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-        self.index_name = "movies"
+        self.index_name = os.getenv("PINECONE_INDEX_NAME")
         self.namespace = "movies-namespace"
 
     def create_index(self):
         # Create a dense index with integrated embedding
-        index_name = "movies"
-        if not self.pinecone_client.has_index(index_name):
+
+        if not self.pinecone_client.has_index(self.index_name):
             self.pinecone_client.create_index_for_model(
-                name=index_name,
+                name=self.index_name,
                 cloud="aws",
                 region="us-east-1",
                 embed={
